@@ -5,7 +5,7 @@ services:
     image: nginx
     # Mount dir in the docker home dir on the host in the container
     volumes:
-      - "/home/docker/public:/usr/share/nginx/html/index.html"
+      - "/home/docker/docker/public/index.html:/usr/share/nginx/html/index.html"
     # Expose port 80 in the container as port 80 on the host system
     ports:
       - 80:80
