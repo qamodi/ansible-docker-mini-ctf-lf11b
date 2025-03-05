@@ -1,0 +1,15 @@
+# The tasks below use 'raw', as more abstracted tasks such as 'apt'
+# or 'shell' require python to be already installed. This can not be
+# guaranteed at this point, so we will use raw until we installed all the
+# necessary stuff.
+
+# first update the apt cache.
+- name: "Repositories are up to date"
+  ansible.builtin.raw: "apt-get update"
+  changed_when: false
+
+# install all requirements for ansible
+- name: "Python is installed"
+  ansible.builtin.raw: "apt-get --yes install python3 python3-apt"
+  changed_when: false
+

@@ -1,0 +1,19 @@
+all:
+  hosts:
+    docker-ctf-0:
+      ansible_host: 157.180.31.65
+    docker-ctf-1:
+      ansible_host: 95.216.148.134
+    docker-ctf-2:
+      ansible_host: 157.180.36.175
+    docker-ctf-3:
+      ansible_host: 157.180.36.176
+  vars:
+    ansible_user: root
+  children:
+    ctf:
+      hosts:
+        docker-ctf-0:
+        docker-ctf-1:
+        docker-ctf-2:
+        docker-ctf-3:

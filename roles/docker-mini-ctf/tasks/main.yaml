@@ -1,0 +1,45 @@
+- name: Ensure system is up to date
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: safe
+    autoremove: true
+- name: Docker is installed and configured
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-compose
+    state: latest
+- name: Useful packages installed and configured (Debian)
+  ansible.builtin.apt:
+    name:
+      - vim
+      - tmux
+      - git
+      - sudo
+    state: present
+
+- name: Add docker user
+  become: true
+  ansible.builtin.user:
+    name: "docker"
+    state: present
+    groups: "docker"
+    shell: "/bin/bash"
+    password: "{{ 's3cr3tDockerPassword' | password_hash('sha512') }}"
+
+- name: SSH Password auth is enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    line: 'PasswordAuthentication yes'
+  notify: Restart sshd
+
+- name: Copy ctf docker-compose setup
+  become: true
+  ansible.builtin.copy:
+    src: home/docker
+    dest: /home/docker
+    mode: '0644'
+    owner: docker
+    group: docker

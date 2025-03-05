@@ -1,0 +1,10 @@
+- name: Setup python
+  hosts: all
+  roles:
+    - python-base
+  gather_facts: false
+
+- name: Common
+  hosts: ctf
+  roles:
+    - docker-mini-ctf
