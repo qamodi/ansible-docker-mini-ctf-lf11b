@@ -8,6 +8,8 @@ all:
       ansible_host: 157.180.36.175
     docker-ctf-3:
       ansible_host: 157.180.36.176
+    docker-ctf-4:
+      ansible_host: 37.27.190.176
   vars:
     ansible_user: root
   children:
@@ -17,3 +19,4 @@ all:
         docker-ctf-1:
         docker-ctf-2:
         docker-ctf-3:
+        docker-ctf-4:
